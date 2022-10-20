@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <style type="text/css">
+        h3{background-color: blue; color: white; padding: 10px 0 10px 20px;}
+        footer{margin: 10px 0;}
+
+        #song {
+            font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        #song td, #song th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        #song tr:nth-child(even){background-color: #f2f2f2;}
+
+        #song tr:hover {background-color: #ddd;}
+
+        #song th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        input[type=text],input[type=email]{
+            width: 100%;
+            padding: 12px 0px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type=submit] {
+            width: 300px;
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        input[type=submit]:hover {
+            background-color: #45a049;
+        }
+
+        #form {
+            width: 500px;
+            border-radius: 5px;
+            background-color: #f2f2f2;
+            padding: 20px;
+        }
+
+        .notify span{font-size: 15px; color: blue;}
+    </style>
+</head>
+<body>
+<h2>LIST SONG</h2>
+<hr>
+<button>
+    <a th:href="@{/create}">Add new song</a>
+</button>
+<form>
+    <input type="text" name="search" placeholder="Search....">
+    <button>Search</button>
+</form>
+<table id="song">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Singer</th>
+        <th>Category</th>
+        <th>Play</th>
+        <th></th>
+        <th></th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="song, songStat : ${songlist}">
+        <td th:text="${songStat.count}"></td>
+        <td th:text="${song.songName}"></td>
+        <td th:text="${song.singer}"></td>
+        <td th:text="${song.category}"></td>
+        <td>
+            <audio th:src="@{'/song/' + ${song.link}}" type="audio/mpeg" controls />
+        </td>
+        <td><a th:href="@{{id}/edit(id=${song.id})}">Update</a></td>
+        <td><a th:href="@{{id}/delete(id=${song.id})}">Delete</a> </td>
+    </tr>
+    </tbody>
+</table>
+<footer th:replace="layout :: footer"></footer>
+</body>
+</html>

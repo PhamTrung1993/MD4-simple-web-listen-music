@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>DELETE</title>
+</head>
+<style>
+  a {
+    text-decoration: none;
+  }
+  #sm {
+    border-radius: 10px;
+    background-color: red;
+  }
+</style>
+<body>
+<button>
+  <a th:href="@{/home}">Home</a>
+</button>
+<hr>
+<h2>DELETE SONG</h2>
+<hr>
+<form th:action="@{/delete}" method="post" th:object="${song}">
+  <input type="hidden" th:field="*{id}">
+  <div>
+    Name : <span th:text="${song.songName}"></span>
+  </div>
+  <div>
+    Singer : <span th:text="${song.singer}"></span>
+  </div>
+  <div>
+    Category : <span th:text="${song.category}"></span>
+  </div>
+  <button>DELETE</button>
+</form>
+</body>
+</html>
